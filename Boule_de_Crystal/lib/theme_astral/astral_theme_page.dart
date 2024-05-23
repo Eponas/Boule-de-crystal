@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 
 class ThemeAstralPage extends StatefulWidget {
   const ThemeAstralPage({super.key});
@@ -9,7 +8,8 @@ class ThemeAstralPage extends StatefulWidget {
 }
 
 class _ThemeAstralPageState extends State<ThemeAstralPage> {
-  List<DateTime?> _selectedDates = [null];
+  DateTime? _selectedDate;
+  String? _resultMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +23,18 @@ class _ThemeAstralPageState extends State<ThemeAstralPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Sélectionnez votre date de naissance',
+              'Entrez votre date de naissance',
               style: TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 16),
-            CalendarDatePicker2(
-              config: CalendarDatePicker2Config(
-                calendarType: CalendarDatePicker2Type.single,
-              ),
-              value: _selectedDates,
-              onValueChanged: (dates) {
+            CalendarDatePicker(
+              initialDate: _selectedDate ?? DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime(2100),
+              onDateChanged: (date) {
                 setState(() {
-                  _selectedDates = dates;
+                  _selectedDate = date;
+                  _resultMessage = null;
                 });
               },
             ),
@@ -43,11 +43,11 @@ class _ThemeAstralPageState extends State<ThemeAstralPage> {
               onPressed: _calculate,
               child: const Text('Calculer'),
             ),
-            if (_selectedDates.isNotEmpty && _selectedDates[0] != null)
+            if (_resultMessage != null)
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Text(
-                  'Date de naissance sélectionnée : ${_selectedDates[0]!.toLocal().toString().split(' ')[0]}',
+                  _resultMessage!,
                   style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -58,20 +58,14 @@ class _ThemeAstralPageState extends State<ThemeAstralPage> {
   }
 
   void _calculate() {
-    if (_selectedDates.isNotEmpty && _selectedDates[0] != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Votre thème astral pour la date de naissance sélectionnée : ${_selectedDates[0]!.toLocal().toString().split(' ')[0]}',
-          ),
-        ),
-      );
+    if (_selectedDate != null) {
+      setState(() {
+        _resultMessage = 'Votre thème astral pour la date de naissance sélectionnée : ${_selectedDate!.toLocal().toString().split(' ')[0]}';
+      });
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Veuillez sélectionner une date de naissance.'),
-        ),
-      );
+      setState(() {
+        _resultMessage = 'Veuillez sélectionner une date de naissance.';
+      });
     }
   }
 }
