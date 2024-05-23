@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=D:\FLUTTER\flutter
-FLUTTER_APPLICATION_PATH=C:\Users\pasca\StudioProjects\Boule_de_Crystal
+FLUTTER_ROOT=C:\Users\pauli\DEV\flutter
+FLUTTER_APPLICATION_PATH=D:\3iL\flutter\Boule-de-crystal\Boule_de_Crystal
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib\main.dart
 FLUTTER_BUILD_DIR=build
