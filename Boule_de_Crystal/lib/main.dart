@@ -1,3 +1,5 @@
+import 'package:boule_de_crystal/pages/home_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'database/database_helper.dart';
 import 'models/zodiac_sign.dart';
@@ -85,64 +87,54 @@ Future<void> initializeDatabase() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Boule de Crystal',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Boule de Crystal'),
+          ),
+          body: const HomePage(),
+          bottomNavigationBar: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return SizedBox(
+                height: constraints.maxHeight * 0.17, // 17% of screen height
+                child: BottomNavigationBar(
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: SizedBox(
+                        height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
+                        child: Image.asset(
+                            'ressources/image1.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
+                      ),
+                      label: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox(
+                        height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
+                        child: Image.asset(
+                            'ressources/image2.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
+                      ),
+                      label: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox(
+                        height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
+                        child: Image.asset(
+                            'ressources/image3.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
+                      ),
+                      label: '',
+                    ),
+                  ],
+                ),
+              );
+            },
+          )
       ),
     );
   }
