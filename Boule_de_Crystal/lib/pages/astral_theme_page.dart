@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ThemeAstralPage extends StatefulWidget {
-  const ThemeAstralPage({super.key});
+class AstralThemePage extends StatefulWidget {
+  const AstralThemePage({super.key});
 
   @override
-  State<ThemeAstralPage> createState() => _ThemeAstralPageState();
+  State<AstralThemePage> createState() => _AstralThemePageState();
 }
 
-class _ThemeAstralPageState extends State<ThemeAstralPage> {
+class _AstralThemePageState extends State<AstralThemePage> {
   DateTime? _selectedDate;
   String? _resultMessage;
 
