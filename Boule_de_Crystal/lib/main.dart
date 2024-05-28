@@ -1,7 +1,9 @@
-import 'package:boule_de_crystal/pages/event_page.dart';
+import 'package:boule_de_crystal/pages/astral_theme_page.dart';
+import 'package:boule_de_crystal/pages/love_compatibility_page.dart';
 import 'package:boule_de_crystal/pages/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'database/database_helper.dart';
 import 'models/zodiac_sign.dart';
 import 'models/chinese_zodiac_sign.dart';
@@ -105,6 +107,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Boule de Crystal',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('fr'),
+      ],
+      locale: const Locale('fr'),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -115,7 +125,8 @@ class _MyAppState extends State<MyApp> {
           ),
           body: [
             HomePage(), // redirect to HomePage(),
-            EventPage(), // redirect to EventPage(),
+            ThemeAstralPage(), // redirect to AstralThemePage,
+            LoveCompatibilityPage(), // redirect to EventPage(),
             // add your new pages here Ingrid if you want so.
           ][_currentIndex],
           bottomNavigationBar: LayoutBuilder(
