@@ -1,6 +1,7 @@
 import 'package:boule_de_crystal/pages/astral_theme_page.dart';
 import 'package:boule_de_crystal/pages/love_compatibility_page.dart';
 import 'package:boule_de_crystal/pages/home_page.dart';
+import 'package:boule_de_crystal/pages/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -125,8 +126,9 @@ class _MyAppState extends State<MyApp> {
           ),
           body: [
             HomePage(), // redirect to HomePage(),
-            ThemeAstralPage(), // redirect to AstralThemePage,
-            LoveCompatibilityPage(), // redirect to EventPage(),
+            AstralThemePage(), // redirect to AstralThemePage,
+            LoveCompatibilityPage(), // redirect to LoveCompatibilityPage,
+            ProfilePage(),  // redirect to ProfilePage,
             // add your new pages here Ingrid if you want so.
           ][_currentIndex],
           bottomNavigationBar: LayoutBuilder(
@@ -160,6 +162,14 @@ class _MyAppState extends State<MyApp> {
                         height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
                         child: Image.asset(
                             'ressources/image3.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
+                      ),
+                      label: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox(
+                        height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
+                        child: Image.asset(
+                            'ressources/image4.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
                       ),
                       label: '',
                     ),
