@@ -1,3 +1,4 @@
+import 'package:boule_de_crystal/models/mock/mockZodiac.dart';
 import 'package:boule_de_crystal/pages/event_page.dart';
 import 'package:boule_de_crystal/pages/home_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -114,7 +115,7 @@ class _MyAppState extends State<MyApp> {
             title: const Text('Boule de Crystal'),
           ),
           body: [
-            HomePage(), // redirect to HomePage(),
+            HomePage(zodiacSigns: mockZodiacSigns), // redirect to HomePage(),
             EventPage(), // redirect to EventPage(),
             // add your new pages here Ingrid if you want so.
           ][_currentIndex],
@@ -141,6 +142,14 @@ class _MyAppState extends State<MyApp> {
                         height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
                         child: Image.asset(
                             'ressources/image2.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
+                      ),
+                      label: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox(
+                        height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
+                        child: Image.asset(
+                            'ressources/image3.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
                       ),
                       label: '',
                     ),
