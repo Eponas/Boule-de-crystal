@@ -21,6 +21,11 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'zodiac.db');
+    try {
+          await deleteDatabase(path);
+    } catch (e) {
+      
+    }
     return await openDatabase(
       path,
       version: 1,
@@ -33,8 +38,8 @@ class DatabaseHelper {
       CREATE TABLE zodiac_signs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         libelle TEXT,
-        date_debut TEXT,
-        date_fin TEXT,
+        dateDebut TEXT,
+        dateFin TEXT,
         description TEXT
       )
     ''');

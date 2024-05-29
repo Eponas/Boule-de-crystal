@@ -1,3 +1,4 @@
+import 'package:boule_de_crystal/database/database_helper.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,19 +8,28 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Asynconf",
-            style: TextStyle(
-                fontSize: 24,
-                ),
-        textAlign: TextAlign.center,
+          FutureBuilder(
+            future: DatabaseHelper().getZodiacSigns(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final list = snapshot.data!;
+                return Column(
+                  children: [
+                    for(final item in list)
+                      Text(item.libelle)
+                    
+                  ],
+                );
+              }
+              return CircularProgressIndicator();
+            },
           ),
         ],
       ),
     );
   }
-
 }

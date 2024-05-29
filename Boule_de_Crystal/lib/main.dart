@@ -10,27 +10,27 @@ import 'models/chinese_zodiac_sign.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- // await initializeDatabase();
+  await initializeDatabase();
   runApp(const MyApp());
 }
 
-/* Future<void> initializeDatabase() async {
-  final dbHelper = DatabaseHelper();
+ Future<void> initializeDatabase() async {
+ final dbHelper = DatabaseHelper();
 
   // Signes du zodiaque
   List<ZodiacSign> zodiacSigns = [
-    ZodiacSign(libelle: 'Bélier', dateDebut: '21-mars', dateFin: '19-avr', description: 'Le bélier est le premier signe du zodiaque. Il symbolise l\'impulsion, la virilité, le courage, l\'énergie et l\'indépendance. Il a pour élément le feu.'),
-    ZodiacSign(libelle: 'Taureau', dateDebut: '20-avr', dateFin: '20-mai', description: 'Le signe du taureau se situe entre l\'équinoxe du printemps et le solstice d\'été. Il est généralement associé à une grande puissance de travail, la sensualité ainsi qu\'à une tendance exagérée pour les plaisirs. Son élément est la terre.'),
-    ZodiacSign(libelle: 'Gémeaux', dateDebut: '21-mai', dateFin: '21-juin', description: 'Généralement représenté sous la forme de deux enfants se tenant par la main, le troisième signe du zodiaque symbolise les contacts humains, les transports, les communications ainsi que la polarité. Il est associé à l\'air.'),
-    ZodiacSign(libelle: 'Cancer', dateDebut: '22-juin', dateFin: '22-juil', description: 'Le signe du cancer se situe juste après le solstice d\'été. Il a pour signification le retrait sur soi, la timidité, la ténacité ainsi que la sensibilité. Il est associé à l\'élément de l\'eau.'),
-    ZodiacSign(libelle: 'Lion', dateDebut: '23-juil', dateFin: '22-août', description: 'Ce signe situé en plein milieu de l\'été a pour symbole la joie de vivre, l\'ambition, l\'élévation et l\'orgueil. Son élément est le feu.'),
-    ZodiacSign(libelle: 'Vierge', dateDebut: '23-août', dateFin: '22-sept', description: 'Le signe de la vierge se place avant l\'équinoxe d\'automne. Il est symbole de travail, de moisson, de dextérité manuelle et de minutie. Il est associé à l\'élément terres.'),
-    ZodiacSign(libelle: 'Balance', dateDebut: '23-sept', dateFin: '23-oct', description: 'Lorsqu\'il entre dans ce signe, le soleil est au point médian de l\'année astronomique. Il représente l\'équilibre, la justice, la mesure. Il a pour élément l\'air.'),
-    ZodiacSign(libelle: 'Scorpion', dateDebut: '24-oct', dateFin: '22-nov', description: 'Le huitième signe du zodiaque est associé à la résistance. Son élément est l\'eau. Il est présenté comme le signe le plus passionné du zodiaque. À tendance sombre, le scorpion peut avoir une tendance à l\'autodestruction.'),
-    ZodiacSign(libelle: 'Sagittaire', dateDebut: '23-nov', dateFin: '22-déc', description: 'Le signe du sagittaire se place juste avant le solstice d\'hiver. Il a pour symbole le mouvement, les réflexes vifs, les instincts nomades ainsi que l\'indépendance. Il s\'agit du dernier signe de feuilles.'),
-    ZodiacSign(libelle: 'Capricorne', dateDebut: '23-déc', dateFin: '20-janv', description: 'Le signe du capricorne commence au solstice d\'hiver. Il est le symbole de la fin d\'un cycle mais aussi de la naissance d\'un cycle nouveau. Il est associé à la patience, la persévérance, la prudence, la réalisation ainsi que le sens du devoir. Il a pour élément la terre.'),
-    ZodiacSign(libelle: 'Verseau', dateDebut: '21-janv', dateFin: '19-févr', description: 'Le signe du verseau a pour symbole la fraternité, l\'indifférence aux choses matérielles, la coopération et la solidarité collective. Il s\'agit d\'un signe lié à l\'air.'),
-    ZodiacSign(libelle: 'Poissons', dateDebut: '20-févr', dateFin: '20-mars', description: 'Le dernier signe du zodiaque symbolise l\'émotivité, l\'hypersensibilité, l\'angoisse ou encore l\'imagination. Il est associé à l\'eau.'),
+    ZodiacSign(libelle: 'Bélier', dateDebut: '03-21', dateFin: '04-19', description: 'Le bélier est le premier signe du zodiaque. Il symbolise l\'impulsion, la virilité, le courage, l\'énergie et l\'indépendance. Il a pour élément le feu.'),
+    ZodiacSign(libelle: 'Taureau', dateDebut: '04-20', dateFin: '05-20', description: 'Le signe du taureau se situe entre l\'équinoxe du printemps et le solstice d\'été. Il est généralement associé à une grande puissance de travail, la sensualité ainsi qu\'à une tendance exagérée pour les plaisirs. Son élément est la terre.'),
+    ZodiacSign(libelle: 'Gémeaux', dateDebut: '05-21', dateFin: '06-21', description: 'Généralement représenté sous la forme de deux enfants se tenant par la main, le troisième signe du zodiaque symbolise les contacts humains, les transports, les communications ainsi que la polarité. Il est associé à l\'air.'),
+    ZodiacSign(libelle: 'Cancer', dateDebut: '06-22', dateFin: '07-22', description: 'Le signe du cancer se situe juste après le solstice d\'été. Il a pour signification le retrait sur soi, la timidité, la ténacité ainsi que la sensibilité. Il est associé à l\'élément de l\'eau.'),
+    ZodiacSign(libelle: 'Lion', dateDebut: '07-23', dateFin: '08-22', description: 'Ce signe situé en plein milieu de l\'été a pour symbole la joie de vivre, l\'ambition, l\'élévation et l\'orgueil. Son élément est le feu.'),
+    ZodiacSign(libelle: 'Vierge', dateDebut: '08-23', dateFin: '09-22', description: 'Le signe de la vierge se place avant l\'équinoxe d\'automne. Il est symbole de travail, de moisson, de dextérité manuelle et de minutie. Il est associé à l\'élément terres.'),
+    ZodiacSign(libelle: 'Balance', dateDebut: '09-23', dateFin: '10-23', description: 'Lorsqu\'il entre dans ce signe, le soleil est au point médian de l\'année astronomique. Il représente l\'équilibre, la justice, la mesure. Il a pour élément l\'air.'),
+    ZodiacSign(libelle: 'Scorpion', dateDebut: '10-24', dateFin: '11-22', description: 'Le huitième signe du zodiaque est associé à la résistance. Son élément est l\'eau. Il est présenté comme le signe le plus passionné du zodiaque. À tendance sombre, le scorpion peut avoir une tendance à l\'autodestruction.'),
+    ZodiacSign(libelle: 'Sagittaire', dateDebut: '11-23', dateFin: '12-22', description: 'Le signe du sagittaire se place juste avant le solstice d\'hiver. Il a pour symbole le mouvement, les réflexes vifs, les instincts nomades ainsi que l\'indépendance. Il s\'agit du dernier signe de feuilles.'),
+    ZodiacSign(libelle: 'Capricorne', dateDebut: '12-23', dateFin: '01-20', description: 'Le signe du capricorne commence au solstice d\'hiver. Il est le symbole de la fin d\'un cycle mais aussi de la naissance d\'un cycle nouveau. Il est associé à la patience, la persévérance, la prudence, la réalisation ainsi que le sens du devoir. Il a pour élément la terre.'),
+    ZodiacSign(libelle: 'Verseau', dateDebut: '01-21', dateFin: '02-19', description: 'Le signe du verseau a pour symbole la fraternité, l\'indifférence aux choses matérielles, la coopération et la solidarité collective. Il s\'agit d\'un signe lié à l\'air.'),
+    ZodiacSign(libelle: 'Poissons', dateDebut: '02-20', dateFin: '03-20', description: 'Le dernier signe du zodiaque symbolise l\'émotivité, l\'hypersensibilité, l\'angoisse ou encore l\'imagination. Il est associé à l\'eau.'),
   ];
 
   for (var sign in zodiacSigns) {
@@ -85,7 +85,7 @@ void main() async {
     await dbHelper.insertChineseZodiacSign(sign);
   }
 }
- */
+ 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
