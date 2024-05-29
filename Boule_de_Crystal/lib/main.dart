@@ -1,3 +1,6 @@
+import 'package:boule_de_crystal/models/mock/mockZodiac.dart';
+import 'package:boule_de_crystal/pages/event_page.dart';
+=======
 import 'package:boule_de_crystal/pages/astral_theme_page.dart';
 import 'package:boule_de_crystal/pages/love_compatibility_page.dart';
 import 'package:boule_de_crystal/pages/home_page.dart';
@@ -125,7 +128,7 @@ class _MyAppState extends State<MyApp> {
             title: const Text('Boule de Crystal'),
           ),
           body: [
-            HomePage(), // redirect to HomePage(),
+            HomePage(zodiacSigns: mockZodiacSigns), // redirect to HomePage(),
             AstralThemePage(), // redirect to AstralThemePage,
             LoveCompatibilityPage(), // redirect to LoveCompatibilityPage,
             ProfilePage(),  // redirect to ProfilePage,
