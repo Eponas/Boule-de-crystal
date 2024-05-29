@@ -126,6 +126,7 @@ class _MyAppState extends State<MyApp> {
             title: const Text('Boule de Crystal'),
           ),
           body: [
+            // navigation pages
             HomePage(zodiacSigns: mockZodiacSigns), // redirect to HomePage(),
             AstralThemePage(), // redirect to AstralThemePage,
             LoveCompatibilityPage(), // redirect to LoveCompatibilityPage,
