@@ -1,6 +1,4 @@
 import 'package:boule_de_crystal/models/mock/mockZodiac.dart';
-import 'package:boule_de_crystal/pages/event_page.dart';
-=======
 import 'package:boule_de_crystal/pages/astral_theme_page.dart';
 import 'package:boule_de_crystal/pages/love_compatibility_page.dart';
 import 'package:boule_de_crystal/pages/home_page.dart';
