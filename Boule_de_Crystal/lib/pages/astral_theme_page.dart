@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
 
-class ThemeAstralPage extends StatefulWidget {
-  const ThemeAstralPage({super.key});
+class AstralThemePage extends StatefulWidget {
+  const AstralThemePage({super.key});
 
   @override
-  State<ThemeAstralPage> createState() => _ThemeAstralPageState();
+  State<AstralThemePage> createState() => _AstralThemePageState();
 }
 
-class _ThemeAstralPageState extends State<ThemeAstralPage> {
+class _AstralThemePageState extends State<AstralThemePage> {
   DateTime? _selectedDate;
   String? _resultMessage;
+
+  void _calculate() {
+    if (_selectedDate != null) {
+      setState(() {
+        _resultMessage = 'Votre thème astral pour le ${_selectedDate!.toLocal().toString().split(' ')[0]}';
+      });
+    } else {
+      setState(() {
+        _resultMessage = 'Veuillez sélectionner une date de naissance.';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calculer un thème astral'),
+        title: const Text('Thème astral'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -26,26 +38,27 @@ class _ThemeAstralPageState extends State<ThemeAstralPage> {
               'Entrez votre date de naissance',
               style: TextStyle(fontSize: 16.0),
             ),
-            const SizedBox(height: 16),
-            CalendarDatePicker(
-              initialDate: _selectedDate ?? DateTime.now(),
-              firstDate: DateTime(1900),
-              lastDate: DateTime(2100),
-              onDateChanged: (date) {
-                setState(() {
-                  _selectedDate = date;
-                  _resultMessage = null;
-                });
-              },
+            SizedBox(
+              height: 270,
+              child: CalendarDatePicker(
+                initialDate: _selectedDate ?? DateTime.now(),
+                firstDate: DateTime(1900),
+                lastDate: DateTime(2100),
+                onDateChanged: (date) {
+                  setState(() {
+                    _selectedDate = date;
+                    _resultMessage = null;
+                  });
+                },
+              ),
             ),
-            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _calculate,
               child: const Text('Calculer'),
             ),
+            const SizedBox(height: 10),
             if (_resultMessage != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+              Center(
                 child: Text(
                   _resultMessage!,
                   style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
@@ -55,17 +68,5 @@ class _ThemeAstralPageState extends State<ThemeAstralPage> {
         ),
       ),
     );
-  }
-
-  void _calculate() {
-    if (_selectedDate != null) {
-      setState(() {
-        _resultMessage = 'Votre thème astral pour la date de naissance sélectionnée : ${_selectedDate!.toLocal().toString().split(' ')[0]}';
-      });
-    } else {
-      setState(() {
-        _resultMessage = 'Veuillez sélectionner une date de naissance.';
-      });
-    }
   }
 }
