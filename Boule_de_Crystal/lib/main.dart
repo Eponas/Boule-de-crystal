@@ -1,8 +1,13 @@
 import 'package:boule_de_crystal/models/mock/mockZodiac.dart';
 import 'package:boule_de_crystal/pages/event_page.dart';
+=======
+import 'package:boule_de_crystal/pages/astral_theme_page.dart';
+import 'package:boule_de_crystal/pages/love_compatibility_page.dart';
 import 'package:boule_de_crystal/pages/home_page.dart';
+import 'package:boule_de_crystal/pages/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'database/database_helper.dart';
 import 'models/zodiac_sign.dart';
 import 'models/chinese_zodiac_sign.dart';
@@ -106,6 +111,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Boule de Crystal',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('fr'),
+      ],
+      locale: const Locale('fr'),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -116,7 +129,9 @@ class _MyAppState extends State<MyApp> {
           ),
           body: [
             HomePage(zodiacSigns: mockZodiacSigns), // redirect to HomePage(),
-            EventPage(), // redirect to EventPage(),
+            AstralThemePage(), // redirect to AstralThemePage,
+            LoveCompatibilityPage(), // redirect to LoveCompatibilityPage,
+            ProfilePage(),  // redirect to ProfilePage,
             // add your new pages here Ingrid if you want so.
           ][_currentIndex],
           bottomNavigationBar: LayoutBuilder(
@@ -157,7 +172,7 @@ class _MyAppState extends State<MyApp> {
                       icon: SizedBox(
                         height: constraints.maxHeight * 0.17 * 0.54, // 54% of navbar height
                         child: Image.asset(
-                            'ressources/image3.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
+                            'ressources/image4.png', fit: BoxFit.fill, alignment: Alignment.bottomCenter),
                       ),
                       label: '',
                     ),

@@ -24,6 +24,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   sqflite: ^2.2.8+4
   path: ^1.8.2
   cupertino_icons: ^1.0.2
@@ -39,3 +41,6 @@ flutter:
     - ressources/image1.png
     - ressources/image2.png
     - ressources/image3.png
+    - ressources/image4.png
+    - ressources/imagesoleil.png
+    - ressources/imagechinois.png
