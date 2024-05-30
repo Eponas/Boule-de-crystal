@@ -121,7 +121,9 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
           appBar: AppBar(
-            title: const Text('Boule de Crystal'),
+            title: const Text('🔮 Boule de Crystal'),
+            centerTitle: true,
+
           ),
           body: [
             // navigation pages
