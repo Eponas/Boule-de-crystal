@@ -12,14 +12,14 @@ import 'models/chinese_zodiac_sign.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDatabase();
+ // await initializeDatabase();
   runApp(const MyApp());
 }
 
- Future<void> initializeDatabase() async {
+/* Future<void> initializeDatabase() async {
  final dbHelper = DatabaseHelper();
 
-  // Signes du zodiaque
+ // Signes du zodiaque
   List<ZodiacSign> zodiacSigns = [
     ZodiacSign(libelle: 'Bélier', dateDebut: '03-21', dateFin: '04-19', description: 'Le bélier est le premier signe du zodiaque. Il symbolise l\'impulsion, la virilité, le courage, l\'énergie et l\'indépendance. Il a pour élément le feu.'),
     ZodiacSign(libelle: 'Taureau', dateDebut: '04-20', dateFin: '05-20', description: 'Le signe du taureau se situe entre l\'équinoxe du printemps et le solstice d\'été. Il est généralement associé à une grande puissance de travail, la sensualité ainsi qu\'à une tendance exagérée pour les plaisirs. Son élément est la terre.'),
@@ -87,14 +87,13 @@ void main() async {
     await dbHelper.insertChineseZodiacSign(sign);
   }
 }
- 
+*/
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> {
 
   int _currentIndex = 0;
@@ -104,7 +103,6 @@ class _MyAppState extends State<MyApp> {
       _currentIndex = index;
     });
   }
-}
 
   @override
   Widget build(BuildContext context) {

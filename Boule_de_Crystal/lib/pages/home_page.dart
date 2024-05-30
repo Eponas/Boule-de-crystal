@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-// database
+/* database
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,6 +36,7 @@ class HomePage extends StatelessWidget {
             },
           ),
         ],
+        */
 // homepage
         
     return Scaffold(
