@@ -27,7 +27,6 @@ class _AstralThemePageState extends State<AstralThemePage> {
   }
 
   String _calculateZodiacSign(DateTime date) {
-    // Calcul du signe astrologique solaire
     final zodiacSigns = [
       'Capricorne', 'Verseau', 'Poissons', 'Bélier',
       'Taureau', 'Gémeaux', 'Cancer', 'Lion',
@@ -52,7 +51,6 @@ class _AstralThemePageState extends State<AstralThemePage> {
   }
 
   String _calculateChineseZodiacSign(int year) {
-    // Calcul du signe astrologique chinois
     final chineseZodiacSigns = [
       'Rat', 'Bœuf', 'Tigre', 'Lapin',
       'Dragon', 'Serpent', 'Cheval', 'Chèvre',
