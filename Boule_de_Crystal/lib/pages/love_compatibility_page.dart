@@ -10,9 +10,9 @@ class LoveCompatibilityPage extends StatefulWidget {
 }
 
 class _LoveCompatibilityPageState extends State<LoveCompatibilityPage> {
-  String? _selectedSign1;
-  String? _selectedSign2;
-  String? _compatibilityResult;
+  String? _selectedSign1; // your zodiac sign
+  String? _selectedSign2; // the zodiac sign of your future soulmate (maybe ?)
+  String? _compatibilityResult; // the result of love compatibility
 
   final DatabaseHelper _databaseHelper = DatabaseHelper();
   late Future<List<ZodiacSign>> _zodiacSignsFuture;
@@ -23,8 +23,9 @@ class _LoveCompatibilityPageState extends State<LoveCompatibilityPage> {
     _zodiacSignsFuture = _databaseHelper.getZodiacSigns();
   }
 
+  // to calculate the love compatibility between the two signs
   void _calculateCompatibility() {
-    if (_selectedSign1 == null || _selectedSign2 == null) {
+    if (_selectedSign1 == null || _selectedSign2 == null) { // if the user have forgotten to pick the two signs
       setState(() {
         _compatibilityResult = 'Veuillez faire la sélection correcte des deux signes astrologiques';
       });
@@ -34,6 +35,7 @@ class _LoveCompatibilityPageState extends State<LoveCompatibilityPage> {
     final selectedSign1 = _zodiacSignsFuture.then((signs) => signs.firstWhere((sign) => sign.libelle == _selectedSign1));
     final selectedSign2 = _zodiacSignsFuture.then((signs) => signs.firstWhere((sign) => sign.libelle == _selectedSign2));
 
+    // calculate the love compatibility
     selectedSign1.then((sign1) {
       selectedSign2.then((sign2) {
         int compatibilityScore = (sign1.id! + sign2.id!) * 4;
@@ -48,7 +50,8 @@ class _LoveCompatibilityPageState extends State<LoveCompatibilityPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Compatibilité amoureuse'),
+        title: const Text('💘 Compatibilité amoureuse'),
+        centerTitle: true,
       ),
       body: FutureBuilder<List<ZodiacSign>>(
         future: _zodiacSignsFuture,

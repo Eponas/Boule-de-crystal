@@ -13,10 +13,10 @@ class AstralThemePage extends StatefulWidget {
 }
 
 class _AstralThemePageState extends State<AstralThemePage> {
-  DateTime? _selectedDate;
-  String? _resultMessage;
-  List<ZodiacSign>? _zodiacSigns;
-  List<ChineseZodiacSign>? _chineseZodiacSigns;
+  DateTime? _selectedDate; // selected birth date by the user
+  String? _resultMessage; // message to display the result of the calculation
+  List<ZodiacSign>? _zodiacSigns; // list of the zodiac signs (solar ones)
+  List<ChineseZodiacSign>? _chineseZodiacSigns; // list of the chinese zodiac signs
 
   @override
   void initState() {
@@ -24,6 +24,7 @@ class _AstralThemePageState extends State<AstralThemePage> {
     _loadSigns();
   }
 
+  // to load the zodiac signs using the database
   Future<void> _loadSigns() async {
     final dbHelper = DatabaseHelper();
     final zodiacSigns = await dbHelper.getZodiacSigns();
@@ -35,6 +36,7 @@ class _AstralThemePageState extends State<AstralThemePage> {
     });
   }
 
+  // to get the zodiac sign thanks to the date selected
   String? _getZodiacSign(DateTime date) {
     if (_zodiacSigns == null) return null;
 
@@ -51,6 +53,7 @@ class _AstralThemePageState extends State<AstralThemePage> {
     return null;
   }
 
+  // to get the chinese zodiac sign thanks to the year of birth selected
   String? _getChineseZodiacSign(int year) {
     if (_chineseZodiacSigns == null) return null;
 
@@ -60,9 +63,10 @@ class _AstralThemePageState extends State<AstralThemePage> {
       }
     }
 
-    return _chineseZodiacSigns![((year - 1980) % 12)].animal; // cycle de 12 ans
+    return _chineseZodiacSigns![((year - 1980) % 12)].animal;
   }
 
+  // to calculate and display the zodiac signs
   void _calculate() {
     if (_selectedDate != null) {
       String? zodiacSign = _getZodiacSign(_selectedDate!);
@@ -72,7 +76,7 @@ class _AstralThemePageState extends State<AstralThemePage> {
         _resultMessage = 'Signe astrologique solaire : ${zodiacSign ?? 'Inconnu'}\n'
             'Signe astrologique chinois : ${chineseZodiacSign ?? 'Inconnu'}';
       });
-    } else {
+    } else { // if a date was not picked by the user
       setState(() {
         _resultMessage = 'Veuillez sélectionner une date de naissance.';
       });
@@ -83,7 +87,8 @@ class _AstralThemePageState extends State<AstralThemePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Thème astral'),
+        title: const Text('🌟 Thème astral'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -95,7 +100,7 @@ class _AstralThemePageState extends State<AstralThemePage> {
               style: TextStyle(fontSize: 16.0),
             ),
             SizedBox(
-              height: 270,
+              height: 270, // we have to reduce the size of the CalendarDatePicker or else it takes too much place on the screen and the result message cannot be displayed
               child: CalendarDatePicker(
                 initialDate: _selectedDate ?? DateTime.now(),
                 firstDate: DateTime(1900),
