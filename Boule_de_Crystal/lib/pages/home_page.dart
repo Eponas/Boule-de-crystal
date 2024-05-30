@@ -1,20 +1,15 @@
 import 'package:boule_de_crystal/database/database_helper.dart';
 import 'package:flutter/material.dart';
-// Mock DB
-import '../models/mock/mockZodiac.dart';
-
 
 
 class HomePage extends StatelessWidget {
-
-
-  final List<ZodiacSign> zodiacSigns;
-
-  HomePage({required this.zodiacSigns});
+  const HomePage({
+      Key? key,
+}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-/* database
+//database
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,9 +31,9 @@ class HomePage extends StatelessWidget {
             },
           ),
         ],
-        */
+
 // homepage
-        
+       /*
     return Scaffold(
       appBar: AppBar(
         title: Text('Zodiac Signs'),
@@ -70,6 +65,8 @@ class HomePage extends StatelessWidget {
             ),
           );
         },
+
+        */
       ),
     );
   }
