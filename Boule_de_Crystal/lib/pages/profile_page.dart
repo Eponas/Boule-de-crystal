@@ -21,42 +21,51 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RichText(
-              text: TextSpan(
-                text: 'Votre prénom :\n',
-                style: const TextStyle(fontSize: 24, color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: prenom,
-                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
-                  ),
-                ],
+            Center(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Votre prénom :\n',
+                  style: const TextStyle(fontSize: 24, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: prenom,
+                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 8),
-            RichText(
-              text: TextSpan(
-                text: 'Votre nom :\n',
-                style: const TextStyle(fontSize: 24, color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: nom,
-                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
-                  ),
-                ],
+            const SizedBox(height: 16),
+            Center(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Votre nom :\n',
+                  style: const TextStyle(fontSize: 24, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: nom,
+                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 8),
-            RichText(
-              text: TextSpan(
-                text: 'Votre date de naissance :\n',
-                style: const TextStyle(fontSize: 24, color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: dateDeNaissance,
-                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
-                  ),
-                ],
+            const SizedBox(height: 16),
+            Center(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Votre date de naissance :\n',
+                  style: const TextStyle(fontSize: 24, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: dateDeNaissance,
+                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -64,16 +73,21 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Image.asset('ressources/imagesoleil.png', width: 50, height: 50),
                 const SizedBox(width: 10),
-                RichText(
-                  text: TextSpan(
-                    text: 'Votre signe solaire :\n',
-                    style: const TextStyle(fontSize: 24, color: Colors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: signeSolaire,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                Expanded(
+                  child: Center(
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: 'Votre signe solaire :\n',
+                        style: const TextStyle(fontSize: 24, color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: signeSolaire,
+                            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],
@@ -83,16 +97,21 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Image.asset('ressources/imagechinois.png', width: 50, height: 50),
                 const SizedBox(width: 10),
-                RichText(
-                  text: TextSpan(
-                    text: 'Votre signe chinois :\n',
-                    style: const TextStyle(fontSize: 24, color: Colors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: signeChinois,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                Expanded(
+                  child: Center(
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: 'Votre signe chinois :\n',
+                        style: const TextStyle(fontSize: 24, color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: signeChinois,
+                            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],

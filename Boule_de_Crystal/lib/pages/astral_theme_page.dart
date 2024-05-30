@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AstralThemePage extends StatefulWidget {
-  const AstralThemePage({super.key});
+  const AstralThemePage({Key? key}) : super(key: key);
 
   @override
   State<AstralThemePage> createState() => _AstralThemePageState();
@@ -9,19 +9,56 @@ class AstralThemePage extends StatefulWidget {
 
 class _AstralThemePageState extends State<AstralThemePage> {
   DateTime? _selectedDate;
-  String? _resultMessage;
+  String? _zodiacSign;
+  String? _chineseZodiacSign;
 
   void _calculate() {
     if (_selectedDate != null) {
       setState(() {
-        _resultMessage = 'Votre thème astral pour le ${_selectedDate!.toLocal().toString().split(' ')[0]}';
+        _zodiacSign = _calculateZodiacSign(_selectedDate!);
+        _chineseZodiacSign = _calculateChineseZodiacSign(_selectedDate!.year);
       });
     } else {
       setState(() {
-        _resultMessage = 'Veuillez sélectionner une date de naissance.';
+        _zodiacSign = null;
+        _chineseZodiacSign = null;
       });
     }
   }
+
+  String _calculateZodiacSign(DateTime date) {
+    final zodiacSigns = [
+      'Capricorne', 'Verseau', 'Poissons', 'Bélier',
+      'Taureau', 'Gémeaux', 'Cancer', 'Lion',
+      'Vierge', 'Balance', 'Scorpion', 'Sagittaire'
+    ];
+    final zodiacSignDates = [
+      DateTime(0, 1, 20), DateTime(0, 2, 19), DateTime(0, 3, 21), DateTime(0, 4, 20),
+      DateTime(0, 5, 21), DateTime(0, 6, 21), DateTime(0, 7, 23), DateTime(0, 8, 23),
+      DateTime(0, 9, 23), DateTime(0, 10, 23), DateTime(0, 11, 22), DateTime(0, 12, 22)
+    ];
+
+    for (var i = 0; i < zodiacSigns.length; i++) {
+      if (date.month == zodiacSignDates[i].month &&
+          date.day >= zodiacSignDates[i].day) {
+        return zodiacSigns[i];
+      } else if (date.month == zodiacSignDates[(i + 11) % 12].month &&
+          date.day <= zodiacSignDates[(i + 11) % 12].day) {
+        return zodiacSigns[(i + 11) % 12];
+      }
+    }
+    return '';
+  }
+
+  String _calculateChineseZodiacSign(int year) {
+    final chineseZodiacSigns = [
+      'Rat', 'Bœuf', 'Tigre', 'Lapin',
+      'Dragon', 'Serpent', 'Cheval', 'Chèvre',
+      'Singe', 'Coq', 'Chien', 'Cochon'
+    ];
+    return chineseZodiacSigns[(year - 1900) % 12];
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +84,8 @@ class _AstralThemePageState extends State<AstralThemePage> {
                 onDateChanged: (date) {
                   setState(() {
                     _selectedDate = date;
-                    _resultMessage = null;
+                    _zodiacSign = null;
+                    _chineseZodiacSign = null;
                   });
                 },
               ),
@@ -57,11 +95,19 @@ class _AstralThemePageState extends State<AstralThemePage> {
               child: const Text('Calculer'),
             ),
             const SizedBox(height: 10),
-            if (_resultMessage != null)
+            if (_zodiacSign != null && _chineseZodiacSign != null)
               Center(
-                child: Text(
-                  _resultMessage!,
-                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                child: Column(
+                  children: [
+                    Text(
+                      'Signe astrologique solaire : $_zodiacSign',
+                      style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Signe astrologique chinois : $_chineseZodiacSign',
+                      style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
           ],

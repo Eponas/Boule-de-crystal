@@ -1,4 +1,3 @@
-import 'package:boule_de_crystal/models/mock/mockZodiac.dart';
 import 'package:boule_de_crystal/pages/astral_theme_page.dart';
 import 'package:boule_de_crystal/pages/love_compatibility_page.dart';
 import 'package:boule_de_crystal/pages/home_page.dart';
@@ -12,11 +11,11 @@ import 'models/chinese_zodiac_sign.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- // await initializeDatabase();
+ await initializeDatabase();
   runApp(const MyApp());
 }
 
-/* Future<void> initializeDatabase() async {
+Future<void> initializeDatabase() async {
  final dbHelper = DatabaseHelper();
 
  // Signes du zodiaque
@@ -87,7 +86,7 @@ void main() async {
     await dbHelper.insertChineseZodiacSign(sign);
   }
 }
-*/
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -126,7 +125,7 @@ class _MyAppState extends State<MyApp> {
           ),
           body: [
             // navigation pages
-            HomePage(zodiacSigns: mockZodiacSigns), // redirect to HomePage(),
+            HomePage(), // redirect to HomePage(),
             AstralThemePage(), // redirect to AstralThemePage,
             LoveCompatibilityPage(), // redirect to LoveCompatibilityPage,
             ProfilePage(),  // redirect to ProfilePage,
