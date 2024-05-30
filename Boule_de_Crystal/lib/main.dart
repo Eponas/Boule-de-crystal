@@ -107,6 +107,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Boule de Crystal',
+
+      // the following lines allows the titles of the CalendarDatePicker to be in french
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -115,6 +117,7 @@ class _MyAppState extends State<MyApp> {
         Locale('fr'),
       ],
       locale: const Locale('fr'),
+
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -183,6 +186,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
-
 }

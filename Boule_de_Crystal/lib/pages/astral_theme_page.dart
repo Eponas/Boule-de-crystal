@@ -1,70 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../database/database_helper.dart';
+import '../models/chinese_zodiac_sign.dart';
+import '../models/zodiac_sign.dart';
+
 
 class AstralThemePage extends StatefulWidget {
-  const AstralThemePage({Key? key}) : super(key: key);
+  const AstralThemePage({super.key});
 
   @override
   State<AstralThemePage> createState() => _AstralThemePageState();
 }
 
 class _AstralThemePageState extends State<AstralThemePage> {
-  DateTime? _selectedDate;
-  String? _zodiacSign;
-  String? _chineseZodiacSign;
+  DateTime? _selectedDate; // selected birth date by the user
+  String? _resultMessage; // message to display the result of the calculation
+  List<ZodiacSign>? _zodiacSigns; // list of the zodiac signs (solar ones)
+  List<ChineseZodiacSign>? _chineseZodiacSigns; // list of the chinese zodiac signs
 
-  void _calculate() {
-    if (_selectedDate != null) {
-      setState(() {
-        _zodiacSign = _calculateZodiacSign(_selectedDate!);
-        _chineseZodiacSign = _calculateChineseZodiacSign(_selectedDate!.year);
-      });
-    } else {
-      setState(() {
-        _zodiacSign = null;
-        _chineseZodiacSign = null;
-      });
-    }
+  @override
+  void initState() {
+    super.initState();
+    _loadSigns();
   }
 
-  String _calculateZodiacSign(DateTime date) {
-    final zodiacSigns = [
-      'Capricorne', 'Verseau', 'Poissons', 'Bélier',
-      'Taureau', 'Gémeaux', 'Cancer', 'Lion',
-      'Vierge', 'Balance', 'Scorpion', 'Sagittaire'
-    ];
-    final zodiacSignDates = [
-      DateTime(0, 1, 20), DateTime(0, 2, 19), DateTime(0, 3, 21), DateTime(0, 4, 20),
-      DateTime(0, 5, 21), DateTime(0, 6, 21), DateTime(0, 7, 23), DateTime(0, 8, 23),
-      DateTime(0, 9, 23), DateTime(0, 10, 23), DateTime(0, 11, 22), DateTime(0, 12, 22)
-    ];
+  // to load the zodiac signs using the database
+  Future<void> _loadSigns() async {
+    final dbHelper = DatabaseHelper();
+    final zodiacSigns = await dbHelper.getZodiacSigns();
+    final chineseZodiacSigns = await dbHelper.getChineseZodiacSigns();
 
-    for (var i = 0; i < zodiacSigns.length; i++) {
-      if (date.month == zodiacSignDates[i].month &&
-          date.day >= zodiacSignDates[i].day) {
-        return zodiacSigns[i];
-      } else if (date.month == zodiacSignDates[(i + 11) % 12].month &&
-          date.day <= zodiacSignDates[(i + 11) % 12].day) {
-        return zodiacSigns[(i + 11) % 12];
+    setState(() {
+      _zodiacSigns = zodiacSigns;
+      _chineseZodiacSigns = chineseZodiacSigns;
+    });
+  }
+
+  // to get the zodiac sign thanks to the date selected
+  String? _getZodiacSign(DateTime date) {
+    if (_zodiacSigns == null) return null;
+
+    String formattedDate = DateFormat('MM-dd').format(date);
+    for (var sign in _zodiacSigns!) {
+      if (formattedDate.compareTo(sign.dateDebut) >= 0 && formattedDate.compareTo(sign.dateFin) <= 0) {
+        return sign.libelle;
+      } else if (sign.dateDebut.compareTo(sign.dateFin) > 0) {
+        if (formattedDate.compareTo(sign.dateDebut) >= 0 || formattedDate.compareTo(sign.dateFin) <= 0) {
+          return sign.libelle;
+        }
       }
     }
-    return '';
+    return null;
   }
 
-  String _calculateChineseZodiacSign(int year) {
-    final chineseZodiacSigns = [
-      'Rat', 'Bœuf', 'Tigre', 'Lapin',
-      'Dragon', 'Serpent', 'Cheval', 'Chèvre',
-      'Singe', 'Coq', 'Chien', 'Cochon'
-    ];
-    return chineseZodiacSigns[(year - 1900) % 12];
+  // to get the chinese zodiac sign thanks to the year of birth selected
+  String? _getChineseZodiacSign(int year) {
+    if (_chineseZodiacSigns == null) return null;
+
+    for (var sign in _chineseZodiacSigns!) {
+      if (sign.year == year) {
+        return sign.animal;
+      }
+    }
+
+    return _chineseZodiacSigns![((year - 1980) % 12)].animal;
   }
 
+  // to calculate and display the zodiac signs
+  void _calculate() {
+    if (_selectedDate != null) {
+      String? zodiacSign = _getZodiacSign(_selectedDate!);
+      String? chineseZodiacSign = _getChineseZodiacSign(_selectedDate!.year);
+
+      setState(() {
+        _resultMessage = 'Signe astrologique solaire : ${zodiacSign ?? 'Inconnu'}\n'
+            'Signe astrologique chinois : ${chineseZodiacSign ?? 'Inconnu'}';
+      });
+    } else { // if a date was not picked by the user
+      setState(() {
+        _resultMessage = 'Veuillez sélectionner une date de naissance.';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Thème astral'),
+        title: const Text('🌟 Thème astral'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -76,7 +100,7 @@ class _AstralThemePageState extends State<AstralThemePage> {
               style: TextStyle(fontSize: 16.0),
             ),
             SizedBox(
-              height: 270,
+              height: 270, // we have to reduce the size of the CalendarDatePicker or else it takes too much place on the screen and the result message cannot be displayed
               child: CalendarDatePicker(
                 initialDate: _selectedDate ?? DateTime.now(),
                 firstDate: DateTime(1900),
@@ -84,8 +108,7 @@ class _AstralThemePageState extends State<AstralThemePage> {
                 onDateChanged: (date) {
                   setState(() {
                     _selectedDate = date;
-                    _zodiacSign = null;
-                    _chineseZodiacSign = null;
+                    _resultMessage = null;
                   });
                 },
               ),
@@ -95,19 +118,11 @@ class _AstralThemePageState extends State<AstralThemePage> {
               child: const Text('Calculer'),
             ),
             const SizedBox(height: 10),
-            if (_zodiacSign != null && _chineseZodiacSign != null)
+            if (_resultMessage != null)
               Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'Signe astrologique solaire : $_zodiacSign',
-                      style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Signe astrologique chinois : $_chineseZodiacSign',
-                      style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                child: Text(
+                  _resultMessage!,
+                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ),
           ],

@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  // THIS PAGE IS ONLY A DISPLAY OF INFORMATION
+
   // Fictive input for page test
-  final String prenom = "Ingrid";
-  final String nom = "Rocheteau";
-  final String dateDeNaissance = "05 Août 2002";
-  final String signeSolaire = "Lion";
-  final String signeChinois = "Cheval";
+  final String firstName = "Ingrid";
+  final String name = "Rocheteau";
+  final String birthDate = "05 Août 2002";
+  final String solarSign = "Lion";
+  final String chineseSign = "Cheval";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Votre profil'),
+        title: const Text('💅 Votre profil'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -29,7 +32,7 @@ class ProfilePage extends StatelessWidget {
                   style: const TextStyle(fontSize: 24, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
-                      text: prenom,
+                      text: firstName,
                       style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
                     ),
                   ],
@@ -45,7 +48,7 @@ class ProfilePage extends StatelessWidget {
                   style: const TextStyle(fontSize: 24, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
-                      text: nom,
+                      text: name,
                       style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
                     ),
                   ],
@@ -61,7 +64,7 @@ class ProfilePage extends StatelessWidget {
                   style: const TextStyle(fontSize: 24, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
-                      text: dateDeNaissance,
+                      text: birthDate,
                       style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
                     ),
                   ],
@@ -71,7 +74,7 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 16),
             Row(
               children: [
-                Image.asset('ressources/imagesoleil.png', width: 50, height: 50),
+                Image.asset('ressources/imagesoleil.png', width: 50, height: 50), // icon of the solar sign
                 const SizedBox(width: 10),
                 Expanded(
                   child: Center(
@@ -82,7 +85,7 @@ class ProfilePage extends StatelessWidget {
                         style: const TextStyle(fontSize: 24, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
-                            text: signeSolaire,
+                            text: solarSign,
                             style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
                           ),
                         ],
@@ -95,7 +98,7 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 16),
             Row(
               children: [
-                Image.asset('ressources/imagechinois.png', width: 50, height: 50),
+                Image.asset('ressources/imagechinois.png', width: 50, height: 50), // icon of the chinese sign
                 const SizedBox(width: 10),
                 Expanded(
                   child: Center(
@@ -106,7 +109,7 @@ class ProfilePage extends StatelessWidget {
                         style: const TextStyle(fontSize: 24, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
-                            text: signeChinois,
+                            text: chineseSign,
                             style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
                           ),
                         ],
